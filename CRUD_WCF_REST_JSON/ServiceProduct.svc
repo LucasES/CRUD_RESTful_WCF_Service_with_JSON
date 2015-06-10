@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="CRUD_WCF_REST_JSON.ServiceProduct" CodeBehind="ServiceProduct.svc.cs" %>
