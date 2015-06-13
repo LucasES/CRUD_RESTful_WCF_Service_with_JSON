@@ -18,7 +18,7 @@ namespace CRUD_WCF_REST_JSON
 
         [OperationContract]
         [WebInvoke(Method = "GET", UriTemplate = "find/{id}", ResponseFormat = WebMessageFormat.Json)]
-        Alimento find(int id);
+        Alimento find(string id);
 
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "create", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]

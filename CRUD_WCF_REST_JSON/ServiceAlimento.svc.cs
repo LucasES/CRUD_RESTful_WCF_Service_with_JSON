@@ -11,6 +11,7 @@ namespace CRUD_WCF_REST_JSON
     // NOTE: In order to launch WCF Test Client for testing this service, please select ServiceAlimento.svc or ServiceAlimento.svc.cs at the Solution Explorer and start debugging.
     public class ServiceAlimento : IServiceAlimento
     {
+
         public List<Alimento> findall()
         {
             using (MyDemoEntities mde = new MyDemoEntities())
@@ -55,11 +56,12 @@ namespace CRUD_WCF_REST_JSON
             };
         }
 
-        public Alimento find(int id)
+        public Alimento find(string id)
         {
             using (MyDemoEntities mde = new MyDemoEntities())
             {
-                return mde.AlimentoEntidades.Where(ae => ae.id == id).Select(ae => new Alimento
+                int nid = Convert.ToInt32(id);
+                return mde.AlimentoEntidades.Where(ae => ae.id == nid).Select(ae => new Alimento
                 {
                     Id = ae.id,
                     Nome = ae.nome,
@@ -209,7 +211,7 @@ namespace CRUD_WCF_REST_JSON
                 {
                     int id = alimento.Id;
                     AlimentoEntidade ae = mde.AlimentoEntidades.Single(a => a.id == id);
-                    mde.AlimentoEntidades.Remove(ae);                    
+                    mde.AlimentoEntidades.Remove(ae);
                     mde.SaveChanges();
                     return true;
                 }
