@@ -9,6 +9,10 @@
         <EntityTypeShape EntityType="mydemoModel.AlimentoEntidade" Width="1.5" PointX="5.625" PointY="1.25" />
         <EntityTypeShape EntityType="mydemoModel.GrupoEntidade" Width="1.5" PointX="3.375" PointY="4.25" />
         <AssociationConnector Association="mydemoModel.FK_Grupo_Id" />
+        <EntityTypeShape EntityType="mydemoModel.Alimento_Refeicao" Width="1.5" PointX="7.875" PointY="4.25" />
+        <EntityTypeShape EntityType="mydemoModel.RefeicaoEntidade" Width="1.5" PointX="11.125" PointY="4.375" />
+        <AssociationConnector Association="mydemoModel.FK_Alimento_Id" />
+        <AssociationConnector Association="mydemoModel.FK_Refeica_Id" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

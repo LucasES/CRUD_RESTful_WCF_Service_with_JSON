@@ -44,6 +44,14 @@
           <Property Name="vitamina_b9" Type="float" />
           <Property Name="vitamina_b12" Type="float" />
         </EntityType>
+        <EntityType Name="Alimento_Refeicao">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="id_alimento" Type="int" Nullable="false" />
+          <Property Name="id_refeicao" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Grupo">
           <Key>
             <PropertyRef Name="Id" />
@@ -61,6 +69,25 @@
           <Property Name="Quantity" Type="int" />
           <Property Name="CreationDate" Type="date" />
         </EntityType>
+        <EntityType Name="Refeicao">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descricao" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_Alimento_Id">
+          <End Role="Alimento" Type="Self.Alimento" Multiplicity="1" />
+          <End Role="Alimento_Refeicao" Type="Self.Alimento_Refeicao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alimento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Alimento_Refeicao">
+              <PropertyRef Name="id_alimento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Grupo_Id">
           <End Role="Grupo" Type="Self.Grupo" Multiplicity="1" />
           <End Role="Alimento" Type="Self.Alimento" Multiplicity="*" />
@@ -73,13 +100,35 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Refeica_Id">
+          <End Role="Refeicao" Type="Self.Refeicao" Multiplicity="1" />
+          <End Role="Alimento_Refeicao" Type="Self.Alimento_Refeicao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Refeicao">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Alimento_Refeicao">
+              <PropertyRef Name="id_refeicao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="mydemoModelStoreContainer">
           <EntitySet Name="Alimento" EntityType="Self.Alimento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Alimento_Refeicao" EntityType="Self.Alimento_Refeicao" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Grupo" EntityType="Self.Grupo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Refeicao" EntityType="Self.Refeicao" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Alimento_Id" Association="Self.FK_Alimento_Id">
+            <End Role="Alimento" EntitySet="Alimento" />
+            <End Role="Alimento_Refeicao" EntitySet="Alimento_Refeicao" />
+          </AssociationSet>
           <AssociationSet Name="FK_Grupo_Id" Association="Self.FK_Grupo_Id">
             <End Role="Grupo" EntitySet="Grupo" />
             <End Role="Alimento" EntitySet="Alimento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Refeica_Id" Association="Self.FK_Refeica_Id">
+            <End Role="Refeicao" EntitySet="Refeicao" />
+            <End Role="Alimento_Refeicao" EntitySet="Alimento_Refeicao" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -103,6 +152,16 @@
           <AssociationSet Name="FK_Grupo_Id" Association="mydemoModel.FK_Grupo_Id">
             <End Role="Grupo" EntitySet="GrupoEntidades" />
             <End Role="Alimento" EntitySet="AlimentoEntidades" />
+          </AssociationSet>
+          <EntitySet Name="Alimento_Refeicao" EntityType="mydemoModel.Alimento_Refeicao" />
+          <EntitySet Name="RefeicaoEntidades" EntityType="mydemoModel.RefeicaoEntidade" />
+          <AssociationSet Name="FK_Alimento_Id" Association="mydemoModel.FK_Alimento_Id">
+            <End Role="AlimentoEntidade" EntitySet="AlimentoEntidades" />
+            <End Role="Alimento_Refeicao" EntitySet="Alimento_Refeicao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Refeica_Id" Association="mydemoModel.FK_Refeica_Id">
+            <End Role="Refeicao" EntitySet="RefeicaoEntidades" />
+            <End Role="Alimento_Refeicao" EntitySet="Alimento_Refeicao" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="AlimentoEntidade">
@@ -144,6 +203,7 @@
           <Property Name="vitamina_b9" Type="Double" />
           <Property Name="vitamina_b12" Type="Double" />
           <NavigationProperty Name="Grupo1" Relationship="mydemoModel.FK_Grupo_Id" FromRole="Alimento" ToRole="Grupo" />
+          <NavigationProperty Name="Alimento_Refeicao" Relationship="mydemoModel.FK_Alimento_Id" FromRole="AlimentoEntidade" ToRole="Alimento_Refeicao" />
         </EntityType>
         <EntityType Name="GrupoEntidade">
           <Key>
@@ -162,6 +222,48 @@
             </Principal>
             <Dependent Role="Alimento">
               <PropertyRef Name="grupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Alimento_Refeicao">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="id_alimento" Type="Int32" Nullable="false" />
+          <Property Name="id_refeicao" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Alimento" Relationship="mydemoModel.FK_Alimento_Id" FromRole="Alimento_Refeicao" ToRole="AlimentoEntidade" />
+          <NavigationProperty Name="Refeicao" Relationship="mydemoModel.FK_Refeica_Id" FromRole="Alimento_Refeicao" ToRole="Refeicao" />
+        </EntityType>
+        <EntityType Name="RefeicaoEntidade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Alimento_Refeicao" Relationship="mydemoModel.FK_Refeica_Id" FromRole="Refeicao" ToRole="Alimento_Refeicao" />
+        </EntityType>
+        <Association Name="FK_Alimento_Id">
+          <End Type="mydemoModel.AlimentoEntidade" Role="AlimentoEntidade" Multiplicity="1" />
+          <End Type="mydemoModel.Alimento_Refeicao" Role="Alimento_Refeicao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AlimentoEntidade">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Alimento_Refeicao">
+              <PropertyRef Name="id_alimento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Refeica_Id">
+          <End Type="mydemoModel.RefeicaoEntidade" Role="Refeicao" Multiplicity="1" />
+          <End Type="mydemoModel.Alimento_Refeicao" Role="Alimento_Refeicao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Refeicao">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Alimento_Refeicao">
+              <PropertyRef Name="id_refeicao" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -226,6 +328,23 @@
             <EntityTypeMapping TypeName="mydemoModel.GrupoEntidade">
               <MappingFragment StoreEntitySet="Grupo">
                 <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Alimento_Refeicao">
+            <EntityTypeMapping TypeName="mydemoModel.Alimento_Refeicao">
+              <MappingFragment StoreEntitySet="Alimento_Refeicao">
+                <ScalarProperty Name="id_refeicao" ColumnName="id_refeicao" />
+                <ScalarProperty Name="id_alimento" ColumnName="id_alimento" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RefeicaoEntidades">
+            <EntityTypeMapping TypeName="mydemoModel.RefeicaoEntidade">
+              <MappingFragment StoreEntitySet="Refeicao">
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

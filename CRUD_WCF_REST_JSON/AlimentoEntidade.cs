@@ -14,6 +14,11 @@ namespace CRUD_WCF_REST_JSON
     
     public partial class AlimentoEntidade
     {
+        public AlimentoEntidade()
+        {
+            this.Alimento_Refeicao = new HashSet<Alimento_Refeicao>();
+        }
+    
         public int id { get; set; }
         public string nome { get; set; }
         public int grupo { get; set; }
@@ -50,5 +55,6 @@ namespace CRUD_WCF_REST_JSON
         public Nullable<double> vitamina_b12 { get; set; }
     
         public virtual GrupoEntidade Grupo1 { get; set; }
+        public virtual ICollection<Alimento_Refeicao> Alimento_Refeicao { get; set; }
     }
 }

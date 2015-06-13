@@ -75,6 +75,7 @@
     </Content>
     <Content Include="ServiceAlimento.svc" />
     <Content Include="ServiceProduct.svc" />
+    <Content Include="ServiceRefeicao.svc" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -84,12 +85,17 @@
     <Compile Include="AlimentoEntidade.cs">
       <DependentUpon>ModelMyDemo.tt</DependentUpon>
     </Compile>
+    <Compile Include="AlimentoRefeicao.cs" />
+    <Compile Include="Alimento_Refeicao.cs">
+      <DependentUpon>ModelMyDemo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Grupo.cs" />
     <Compile Include="GrupoEntidade.cs">
       <DependentUpon>ModelMyDemo.tt</DependentUpon>
     </Compile>
     <Compile Include="IServiceAlimento.cs" />
     <Compile Include="IServiceProduct.cs" />
+    <Compile Include="IServiceRefeicao.cs" />
     <Compile Include="ModelMyDemo.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -110,11 +116,18 @@
       <DependentUpon>ModelMyDemo.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Refeicao.cs" />
+    <Compile Include="RefeicaoEntidade.cs">
+      <DependentUpon>ModelMyDemo.tt</DependentUpon>
+    </Compile>
     <Compile Include="ServiceAlimento.svc.cs">
       <DependentUpon>ServiceAlimento.svc</DependentUpon>
     </Compile>
     <Compile Include="ServiceProduct.svc.cs">
       <DependentUpon>ServiceProduct.svc</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceRefeicao.svc.cs">
+      <DependentUpon>ServiceRefeicao.svc</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

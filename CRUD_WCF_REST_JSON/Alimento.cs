@@ -42,7 +42,8 @@ namespace CRUD_WCF_REST_JSON
         public Nullable<double> Vitamina_b9 { get; set; }
         public Nullable<double> Vitamina_b12 { get; set; }
 
-        public virtual Grupo Grupo1 { get; set; }
+        public virtual Grupo Grupo1 { get; set; }        
+        public virtual ICollection<Refeicao> Refeicoes { get; set; }
     }
 
 }
