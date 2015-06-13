@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRUD_WCF_REST_JSON", "CRUD_
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrudWithJsonClient", "CrudWithJsonClient\CrudWithJsonClient.csproj", "{0E76FB97-D095-482C-887C-046F3733E9AB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cliente", "Cliente\Cliente.csproj", "{A57BF94A-DF62-486E-9919-1D3145A8A143}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{0E76FB97-D095-482C-887C-046F3733E9AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E76FB97-D095-482C-887C-046F3733E9AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E76FB97-D095-482C-887C-046F3733E9AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A57BF94A-DF62-486E-9919-1D3145A8A143}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A57BF94A-DF62-486E-9919-1D3145A8A143}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A57BF94A-DF62-486E-9919-1D3145A8A143}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A57BF94A-DF62-486E-9919-1D3145A8A143}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
