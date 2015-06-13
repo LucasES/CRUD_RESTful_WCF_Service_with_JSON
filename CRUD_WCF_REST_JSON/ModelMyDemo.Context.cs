@@ -26,5 +26,7 @@ namespace CRUD_WCF_REST_JSON
         }
     
         public virtual DbSet<ProductEntity> ProductEntities { get; set; }
+        public virtual DbSet<AlimentoEntidade> AlimentoEntidades { get; set; }
+        public virtual DbSet<GrupoEntidade> GrupoEntidades { get; set; }
     }
 }

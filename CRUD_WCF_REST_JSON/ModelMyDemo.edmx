@@ -4,22 +4,85 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="mydemoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Product">
+    <Schema Namespace="mydemoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Alimento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="grupo" Type="int" Nullable="false" />
+          <Property Name="porcao" Type="int" />
+          <Property Name="valor_calorico" Type="float" />
+          <Property Name="cho" Type="float" />
+          <Property Name="proteinas" Type="float" />
+          <Property Name="gorduras_totais" Type="float" />
+          <Property Name="gorduras_saturadas" Type="float" />
+          <Property Name="colesterol" Type="float" />
+          <Property Name="fosforo" Type="float" />
+          <Property Name="poliinsaturados" Type="float" />
+          <Property Name="monoinsaturados" Type="float" />
+          <Property Name="vitamina_b1" Type="float" />
+          <Property Name="vitamina_b2" Type="float" />
+          <Property Name="vitamina_b3" Type="float" />
+          <Property Name="vitamina_b6" Type="float" />
+          <Property Name="gordura_trans" Type="float" />
+          <Property Name="fibra_alimentar" Type="float" />
+          <Property Name="acucar" Type="float" />
+          <Property Name="sodio" Type="float" />
+          <Property Name="selenio" Type="float" />
+          <Property Name="calcio" Type="float" />
+          <Property Name="ferro" Type="float" />
+          <Property Name="potassio" Type="float" />
+          <Property Name="zinco" Type="float" />
+          <Property Name="magnesio" Type="float" />
+          <Property Name="vitamina_a" Type="float" />
+          <Property Name="vitamina_b" Type="float" />
+          <Property Name="vitamina_c" Type="float" />
+          <Property Name="vitamina_d" Type="float" />
+          <Property Name="vitamina_e" Type="float" />
+          <Property Name="vitamina_b9" Type="float" />
+          <Property Name="vitamina_b12" Type="float" />
+        </EntityType>
+        <EntityType Name="Grupo">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Price" Type="money" />
           <Property Name="Quantity" Type="int" />
           <Property Name="CreationDate" Type="date" />
         </EntityType>
+        <Association Name="FK_Grupo_Id">
+          <End Role="Grupo" Type="Self.Grupo" Multiplicity="1" />
+          <End Role="Alimento" Type="Self.Alimento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Alimento">
+              <PropertyRef Name="grupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="mydemoModelStoreContainer">
+          <EntitySet Name="Alimento" EntityType="Self.Alimento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grupo" EntityType="Self.Grupo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Grupo_Id" Association="Self.FK_Grupo_Id">
+            <End Role="Grupo" EntitySet="Grupo" />
+            <End Role="Alimento" EntitySet="Alimento" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="mydemoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -35,7 +98,73 @@
         </EntityType>
         <EntityContainer Name="MyDemoEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ProductEntities" EntityType="mydemoModel.ProductEntity" />
+          <EntitySet Name="AlimentoEntidades" EntityType="mydemoModel.AlimentoEntidade" />
+          <EntitySet Name="GrupoEntidades" EntityType="mydemoModel.GrupoEntidade" />
+          <AssociationSet Name="FK_Grupo_Id" Association="mydemoModel.FK_Grupo_Id">
+            <End Role="Grupo" EntitySet="GrupoEntidades" />
+            <End Role="Alimento" EntitySet="AlimentoEntidades" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="AlimentoEntidade">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="grupo" Type="Int32" Nullable="false" />
+          <Property Name="porcao" Type="Int32" />
+          <Property Name="valor_calorico" Type="Double" />
+          <Property Name="cho" Type="Double" />
+          <Property Name="proteinas" Type="Double" />
+          <Property Name="gorduras_totais" Type="Double" />
+          <Property Name="gorduras_saturadas" Type="Double" />
+          <Property Name="colesterol" Type="Double" />
+          <Property Name="fosforo" Type="Double" />
+          <Property Name="poliinsaturados" Type="Double" />
+          <Property Name="monoinsaturados" Type="Double" />
+          <Property Name="vitamina_b1" Type="Double" />
+          <Property Name="vitamina_b2" Type="Double" />
+          <Property Name="vitamina_b3" Type="Double" />
+          <Property Name="vitamina_b6" Type="Double" />
+          <Property Name="gordura_trans" Type="Double" />
+          <Property Name="fibra_alimentar" Type="Double" />
+          <Property Name="acucar" Type="Double" />
+          <Property Name="sodio" Type="Double" />
+          <Property Name="selenio" Type="Double" />
+          <Property Name="calcio" Type="Double" />
+          <Property Name="ferro" Type="Double" />
+          <Property Name="potassio" Type="Double" />
+          <Property Name="zinco" Type="Double" />
+          <Property Name="magnesio" Type="Double" />
+          <Property Name="vitamina_a" Type="Double" />
+          <Property Name="vitamina_b" Type="Double" />
+          <Property Name="vitamina_c" Type="Double" />
+          <Property Name="vitamina_d" Type="Double" />
+          <Property Name="vitamina_e" Type="Double" />
+          <Property Name="vitamina_b9" Type="Double" />
+          <Property Name="vitamina_b12" Type="Double" />
+          <NavigationProperty Name="Grupo1" Relationship="mydemoModel.FK_Grupo_Id" FromRole="Alimento" ToRole="Grupo" />
+        </EntityType>
+        <EntityType Name="GrupoEntidade">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Alimentoes" Relationship="mydemoModel.FK_Grupo_Id" FromRole="Grupo" ToRole="Alimento" />
+        </EntityType>
+        <Association Name="FK_Grupo_Id">
+          <End Type="mydemoModel.GrupoEntidade" Role="Grupo" Multiplicity="1" />
+          <End Type="mydemoModel.AlimentoEntidade" Role="Alimento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Alimento">
+              <PropertyRef Name="grupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -50,6 +179,54 @@
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AlimentoEntidades">
+            <EntityTypeMapping TypeName="mydemoModel.AlimentoEntidade">
+              <MappingFragment StoreEntitySet="Alimento">
+                <ScalarProperty Name="vitamina_b12" ColumnName="vitamina_b12" />
+                <ScalarProperty Name="vitamina_b9" ColumnName="vitamina_b9" />
+                <ScalarProperty Name="vitamina_e" ColumnName="vitamina_e" />
+                <ScalarProperty Name="vitamina_d" ColumnName="vitamina_d" />
+                <ScalarProperty Name="vitamina_c" ColumnName="vitamina_c" />
+                <ScalarProperty Name="vitamina_b" ColumnName="vitamina_b" />
+                <ScalarProperty Name="vitamina_a" ColumnName="vitamina_a" />
+                <ScalarProperty Name="magnesio" ColumnName="magnesio" />
+                <ScalarProperty Name="zinco" ColumnName="zinco" />
+                <ScalarProperty Name="potassio" ColumnName="potassio" />
+                <ScalarProperty Name="ferro" ColumnName="ferro" />
+                <ScalarProperty Name="calcio" ColumnName="calcio" />
+                <ScalarProperty Name="selenio" ColumnName="selenio" />
+                <ScalarProperty Name="sodio" ColumnName="sodio" />
+                <ScalarProperty Name="acucar" ColumnName="acucar" />
+                <ScalarProperty Name="fibra_alimentar" ColumnName="fibra_alimentar" />
+                <ScalarProperty Name="gordura_trans" ColumnName="gordura_trans" />
+                <ScalarProperty Name="vitamina_b6" ColumnName="vitamina_b6" />
+                <ScalarProperty Name="vitamina_b3" ColumnName="vitamina_b3" />
+                <ScalarProperty Name="vitamina_b2" ColumnName="vitamina_b2" />
+                <ScalarProperty Name="vitamina_b1" ColumnName="vitamina_b1" />
+                <ScalarProperty Name="monoinsaturados" ColumnName="monoinsaturados" />
+                <ScalarProperty Name="poliinsaturados" ColumnName="poliinsaturados" />
+                <ScalarProperty Name="fosforo" ColumnName="fosforo" />
+                <ScalarProperty Name="colesterol" ColumnName="colesterol" />
+                <ScalarProperty Name="gorduras_saturadas" ColumnName="gorduras_saturadas" />
+                <ScalarProperty Name="gorduras_totais" ColumnName="gorduras_totais" />
+                <ScalarProperty Name="proteinas" ColumnName="proteinas" />
+                <ScalarProperty Name="cho" ColumnName="cho" />
+                <ScalarProperty Name="valor_calorico" ColumnName="valor_calorico" />
+                <ScalarProperty Name="porcao" ColumnName="porcao" />
+                <ScalarProperty Name="grupo" ColumnName="grupo" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GrupoEntidades">
+            <EntityTypeMapping TypeName="mydemoModel.GrupoEntidade">
+              <MappingFragment StoreEntitySet="Grupo">
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

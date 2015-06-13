@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -47,6 +48,7 @@ namespace CRUD_WCF_REST_JSON
             {
                 try
                 {
+                    Debug.WriteLine("Criar");
                     ProductEntity pe = new ProductEntity();
                     pe.Name = product.Name;
                     pe.Price = product.Price;
@@ -70,6 +72,8 @@ namespace CRUD_WCF_REST_JSON
             {
                 try
                 {
+
+                    Debug.WriteLine("Send to debug output.");
                     int id = Convert.ToInt32(product.Id);
                     ProductEntity pe = mde.ProductEntities.Single(p => p.Id == id);
                     pe.Name = product.Name;
